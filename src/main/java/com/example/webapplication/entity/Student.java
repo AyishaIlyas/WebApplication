@@ -2,6 +2,9 @@ package com.example.webapplication.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name="students")
 public class Student {
@@ -9,6 +12,9 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private int id;
+
+    @Column(length = 45,nullable = false)
+    private String studentId;
     @Column(length = 45,nullable = false)
     private String firstName;
     @Column(length = 45,nullable = false)
@@ -17,6 +23,8 @@ public class Student {
     private String email;
     @Column(length = 15,nullable = false)
     private String password;
+    @Column(nullable = false,unique = true,length = 255)
+    private String course;
     public boolean isEnabled() {
         return enabled;
     }
@@ -67,15 +75,33 @@ public class Student {
         this.password = password;
     }
 
+    public String getCourses() {
+        return course;
+    }
+
+    public void setCourses(String course) {
+        this.course = course;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
     public Student(){
 
     }
 
-    public Student(String firstName, String lastName, String email, String password) {
+    public Student(String firstName, String lastName, String email, String password,String studentId, String course) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.studentId=studentId;
+        this.course=course;
     }
 
     @Override
@@ -88,4 +114,7 @@ public class Student {
                 ", lastname='" + lastName + '\'' +
                 '}';
     }
+
+    @ManyToMany(mappedBy = "students")
+    private Set<Course> courses = new HashSet<>();
 }

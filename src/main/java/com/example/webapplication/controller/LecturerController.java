@@ -15,7 +15,7 @@ public class LecturerController {
     private LecturerService lecturerService;
 
     public LecturerController(LecturerService lecturerService) {
-        this.lecturerService = lecturerService;
+        this.lecturerService=lecturerService;
     }
 
     //handle method
@@ -40,15 +40,12 @@ public class LecturerController {
 
     //update request handler
 
-    @GetMapping("/lecturers/edit/{id}")
+    @GetMapping("/lectures/edit/{id}")
     public String editLecturerForm(@PathVariable int id, Model model){
         model.addAttribute("lecturer", lecturerService.getLecturerById(id));
         return "edit_lecturer";
-
-
-
     }
-    @PostMapping("/slecturers/{id}")
+    @PostMapping("/lecturers/{id}")
     public String updateLecturer(@PathVariable int id,
                                 @ModelAttribute("lecturer") Lecturer lecturer,
                                 Model model) {
@@ -72,7 +69,4 @@ public class LecturerController {
         return  "redirect:/lecturers";
 
     }
-
-
-
 }

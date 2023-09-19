@@ -15,7 +15,7 @@ public class LecturerServiceImpl implements LecturerService {
     private LecturerRepository lecturerRepository;
 
     public LecturerServiceImpl(LecturerRepository lecturerRepository){
-        this.lecturerRepository=lecturerRepository;
+        this.lecturerRepository = lecturerRepository;
     }
     @Override
     public List<Lecturer> getAllLecturers() {
