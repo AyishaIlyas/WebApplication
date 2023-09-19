@@ -25,7 +25,7 @@ public class LecturerController {
         return "lecturers";
     }
 
-    @GetMapping("/lecturers/lecturers_form")
+    @GetMapping("/lecturers_form")
     public String createLecturerForm(Model model) {
         Lecturer lecturer = new Lecturer();
         model.addAttribute("lecturer", lecturer);
@@ -48,7 +48,7 @@ public class LecturerController {
 
 
     }
-    @PostMapping("/slecturers/{id}")
+    @PostMapping("/lecturers/{id}")
     public String updateLecturer(@PathVariable int id,
                                 @ModelAttribute("lecturer") Lecturer lecturer,
                                 Model model) {
