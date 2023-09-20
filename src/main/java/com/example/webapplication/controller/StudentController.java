@@ -32,6 +32,14 @@ public class StudentController {
         return "students_form";
 
     }
+
+    @GetMapping("/students/students_form")
+    public String createStudentForm2(Model model) {
+        Student student = new Student();
+        model.addAttribute("student", student);
+        return "students_form";
+    }
+
     @PostMapping("/students")
     public String addStudent(@ModelAttribute("student") Student student){
         studentService.addStudent(student);

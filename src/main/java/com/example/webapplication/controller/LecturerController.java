@@ -32,6 +32,14 @@ public class LecturerController {
         return "lecturers_form";
 
     }
+
+    @GetMapping("/lecturers/lecturers_form")
+    public String createLecturerForm2(Model model) {
+        Lecturer lecturer = new Lecturer();
+        model.addAttribute("lecturer", lecturer);
+        return "lecturers_form";
+
+    }
     @PostMapping("/lecturers")
     public String addLecturer(@ModelAttribute("lecturer") Lecturer lecturer){
         lecturerService.addLecturer(lecturer);
