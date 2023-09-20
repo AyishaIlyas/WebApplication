@@ -25,7 +25,7 @@ public class LecturerController {
         return "lecturers";
     }
 
-    @GetMapping("/lecturers/lecturers_form")
+    @GetMapping("/lecturers_form")
     public String createLecturerForm(Model model) {
         Lecturer lecturer = new Lecturer();
         model.addAttribute("lecturer", lecturer);

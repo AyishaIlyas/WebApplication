@@ -25,7 +25,7 @@ public class CourseController {
         return "courses";
     }
 
-    @GetMapping("/courses/courses_form")
+    @GetMapping("/courses_form")
     public String createCourseForm(Model model) {
         Course course = new Course();
         model.addAttribute("course", course);
