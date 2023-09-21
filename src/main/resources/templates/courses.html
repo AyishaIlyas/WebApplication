@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-  <meta charset="ISO-8859-1">
+  <meta charset="UTF-8">
   <title>Courses</title>
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
   <style>
     /* Custom CSS styles */
     body {
-      background-color: #f0f0f0;
+      background-color: #f2f2f2;
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
@@ -18,11 +19,14 @@
 
     .navbar {
       background-color: #343a40;
+      padding: 15px 0;
+      border-bottom: 4px solid #007bff;
     }
 
     .navbar-brand {
       color: #fff;
       font-weight: bold;
+      font-size: 24px;
     }
 
     .navbar-toggler-icon {
@@ -31,15 +35,22 @@
 
     .container {
       margin-top: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
     h1 {
-      color: #333;
+      color: #007bff;
+      margin-bottom: 20px;
     }
 
     .btn-primary {
       background-color: #007bff;
       color: #fff;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
     }
 
     .btn-primary:hover {
@@ -49,6 +60,8 @@
     .btn-danger {
       background-color: #dc3545;
       color: #fff;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
     }
 
     .btn-danger:hover {
@@ -63,33 +76,51 @@
       background-color: #343a40;
       color: #fff;
     }
+
+    /* Header Styles */
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+
+    /* Footer Styles */
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 0;
+      text-align: center;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
   </style>
 </head>
+
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
   <!-- Brand -->
   <a class="navbar-brand" href="#">Student Management System</a>
 
-  <!-- Toggler/collapsibe Button -->
+  <!-- Toggler/collapsible Button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
 </nav>
 
-
-<div class ="container">
-  <div class = "row">
-    <h1> Course List </h1>
-  </div>
-
-  <div class = "row">
-    <div class = "col-lg-3">
-      <a th:href = "@{/courses/courses_form}" class = "btn btn-primary btn-sm mb-3"> Add Course</a>
-      <a th:href = "@{/admin_dashboard}" class = "btn btn-primary btn-sm mb-3"> Admin Dashboard</a>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col">
+      <h1>Course List</h1>
+    </div>
+    <div class="col-md-3 text-right">
+      <a th:href="@{/courses/courses_form}" class="btn btn-primary">Add Course</a>
     </div>
   </div>
-  <table class = "table table-striped table-bordered">
-    <thead class = "table-dark">
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
     <tr>
       <th>Number</th>
       <th>Course Name</th>
@@ -97,27 +128,31 @@
       <th>Actions</th>
     </tr>
     </thead>
-
     <tbody>
-    <tr th:each = "course: ${courses}">
-      <td th:text = "${course.id}"></td>
-      <td th:text = "${course.courseName}"></td>
-      <td th:text = "${course.courseCode}"></td>
-
+    <tr th:each="course: ${courses}">
+      <td th:text="${course.id}"></td>
+      <td th:text="${course.courseName}"></td>
+      <td th:text="${course.courseCode}"></td>
       <td>
-
-        <a th:href = "@{/courses/edit/{id}(id=${course.id})}"
-           class = "btn btn-primary">Update</a>
-
-        <a th:href = "@{/courses/{id}(id=${course.id})}"
-           class = "btn btn-danger">Delete</a>
-
+        <a th:href="@{/courses/edit/{id}(id=${course.id})}" class="btn btn-primary">Update</a>
+        <a th:href="@{/courses/{id}(id=${course.id})}" class="btn btn-danger">Delete</a>
       </td>
     </tr>
     </tbody>
-
   </table>
-
 </div>
+
+<footer>
+  &copy; 2023 Student Management System
+</footer>
+
+<!-- Include Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRc6O/3pj5z5f5OG0TaI6F1m2oZz2A6AfoJw5is5f5"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYlT"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
