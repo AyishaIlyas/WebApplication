@@ -12,8 +12,8 @@ public class Lecturer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private int id;
-    @Column(length = 45,nullable = false)
 
+    @Column(length = 45,nullable = false)
     private String lecId;
 
     @Column(length = 45,nullable = false)
@@ -22,9 +22,12 @@ public class Lecturer {
     private String email;
     @Column(length = 15,nullable = false)
     private String password;
-    @Column(nullable = false,unique = true,length = 255)
+    @Column(nullable = false,unique = true,length = 70)
     private String course;
 
+    public Lecturer() {
+
+    }
 
 
     public int getId() {
@@ -71,13 +74,10 @@ public class Lecturer {
         this.course = course;
     }
 
-    public void setLecId(String lecId){
-        this.lecId=lecId;
-    }
 
-    public Lecturer(){
+    public void setLecId(String lecId){this.lecId=lecId;}
 
-    }
+
 
     public Lecturer(String name, String email, String password, String lecId, String course) {
         this.name = name;
