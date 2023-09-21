@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Student Management System</title>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <a class="navbar-brand" href="#">Student Management System</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+
+<div class ="container">
+  <div class = "p-4">
+    <a th:href = "@{/students}" class = "btn btn-primary">Manage Students</a><br>
+  </div>
+  <div class = "p-4">
+    <a th:href = "@{/lecturers}" class = "btn btn-primary">Manage Lecturers</a><br>
+  </div>
+  <div class = "p-4">
+    <a th:href = "@{/courses}" class = "btn btn-primary">Manage Courses</a><br>
+  </div>
+  <div class = "p-4">
+    <a th:href = "@{/report}" class = "btn btn-primary">Generate Report</a><br>
+  </div>
+</div>
+</body>
+</html>

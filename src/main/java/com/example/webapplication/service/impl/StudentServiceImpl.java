@@ -39,5 +39,8 @@ public class StudentServiceImpl implements StudentService {
             studentRepository.deleteById(id);
         }
 
-
+    public List<Student> findStudentByKeyword(String keyword){
+        List<Student> StudentIdList = studentRepository.findByStudentIdContainingIgnoreCase(keyword);
+        return StudentIdList;
+    }
 }

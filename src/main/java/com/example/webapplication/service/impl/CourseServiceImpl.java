@@ -1,6 +1,7 @@
 package com.example.webapplication.service.impl;
 
 import com.example.webapplication.entity.Course;
+import com.example.webapplication.entity.Student;
 import com.example.webapplication.repository.CourseRepository;
 
 import com.example.webapplication.service.CourseService;
@@ -41,7 +42,10 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void deleteCourseById(int id) {
         courseRepository.deleteById(id);
+    }
 
-
+    public List<Course> findCourseByKeyword(String keyword){
+        List<Course> CourseCodeList = courseRepository.findByCourseCodeContainingIgnoreCase(keyword);
+        return CourseCodeList;
     }
 }
