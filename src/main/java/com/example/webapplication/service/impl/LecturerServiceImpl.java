@@ -1,8 +1,10 @@
 package com.example.webapplication.service.impl;
 
+import com.example.webapplication.entity.Course;
 import com.example.webapplication.entity.Lecturer;
 import com.example.webapplication.repository.LecturerRepository;
 import com.example.webapplication.service.LecturerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +12,6 @@ import java.util.List;
 @Service
 
 public class LecturerServiceImpl implements LecturerService {
-
 
     private LecturerRepository lecturerRepository;
 
@@ -40,6 +41,10 @@ public class LecturerServiceImpl implements LecturerService {
     @Override
     public void deleteLecturerById(int id) {
         lecturerRepository.deleteById(id);
+    }
 
+    public List<Lecturer> findLecturerByKeyword(String keyword){
+        List<Lecturer> LecIdList = lecturerRepository.findByLecIdContainingIgnoreCase(keyword);
+        return LecIdList;
     }
 }
