@@ -5,10 +5,7 @@ import com.example.webapplication.entity.Student;
 import com.example.webapplication.service.CourseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class CourseController {
@@ -40,10 +37,14 @@ public class CourseController {
         return "courses_form";
     }
     @PostMapping("/courses")
-    public String addCourse(@ModelAttribute("course") Course course){
-        courseService.addCourse(course);
+    public String addCourse(@ModelAttribute("course") Course course, @RequestParam(name = "action", required = false) String action) {
+        if ("submit".equals(action)) {
+            // Add the course only when the "Submit" button is clicked
+            courseService.addCourse(course);
+        }
         return "redirect:/courses";
     }
+
 
     //update request handler
     @GetMapping("/courses/edit/{id}")
@@ -53,19 +54,24 @@ public class CourseController {
     }
     @PostMapping("/courses/{id}")
     public String updateCourse(@PathVariable int id,
-                                @ModelAttribute("course") Course course,
-                                Model model) {
+                               @ModelAttribute("course") Course course,
+                               @RequestParam(name = "action", required = false) String action,
+                               Model model) {
 
-        // get course from database by id
-        Course existingCourse = courseService.getCourseById(id);
-        existingCourse.setId(id);
-        existingCourse.setCourseName(course.getCourseName());
-        existingCourse.setCourseCode(course.getCourseCode());
+        if ("submit".equals(action)) {
+            // get course from the database by id
+            Course existingCourse = courseService.getCourseById(id);
+            existingCourse.setId(id);
+            existingCourse.setCourseName(course.getCourseName());
+            existingCourse.setCourseCode(course.getCourseCode());
 
-        // save updated course object
-        courseService.updateCourse(existingCourse);
+            // save updated course object
+            courseService.updateCourse(existingCourse);
+        }
+
         return "redirect:/courses";
     }
+
     //handler method to handle delete requests
     @GetMapping("/courses/{id}")
     public String deleteCourse(@PathVariable int id){

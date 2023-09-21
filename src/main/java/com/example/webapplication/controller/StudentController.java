@@ -4,10 +4,7 @@ import com.example.webapplication.entity.Student;
 import com.example.webapplication.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class StudentController {
@@ -41,10 +38,14 @@ public class StudentController {
     }
 
     @PostMapping("/students")
-    public String addStudent(@ModelAttribute("student") Student student){
-        studentService.addStudent(student);
+    public String addStudent(@ModelAttribute("student") Student student, @RequestParam(name = "action", required = false) String action) {
+        if ("submit".equals(action)) {
+            // Add the student only when the "Submit" button is clicked
+            studentService.addStudent(student);
+        }
         return "redirect:/students";
     }
+
 
     //update request handler
 
@@ -56,20 +57,25 @@ public class StudentController {
     @PostMapping("/students/{id}")
     public String updateStudent(@PathVariable int id,
                                 @ModelAttribute("student") Student student,
+                                @RequestParam(name = "action", required = false) String action,
                                 Model model) {
 
-        // get student from database by id
-        Student existingStudent = studentService.getStudentById(id);
-        existingStudent.setId(id);
-        existingStudent.setFirstName(student.getFirstName());
-        existingStudent.setLastName(student.getLastName());
-        existingStudent.setEmail(student.getEmail());
-        existingStudent.setPassword(student.getPassword());
+        if ("submit".equals(action)) {
+            // get student from database by id
+            Student existingStudent = studentService.getStudentById(id);
+            existingStudent.setId(id);
+            existingStudent.setFirstName(student.getFirstName());
+            existingStudent.setLastName(student.getLastName());
+            existingStudent.setEmail(student.getEmail());
+            existingStudent.setPassword(student.getPassword());
 
-        // save updated student object
-        studentService.updateStudent(existingStudent);
+            // save updated student object
+            studentService.updateStudent(existingStudent);
+        }
+
         return "redirect:/students";
     }
+
 
     //handler method to handle delete requests
     @GetMapping("/students/{id}")
